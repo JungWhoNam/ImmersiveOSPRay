@@ -109,18 +109,21 @@ while (true) {
 ```
 
 # 3. Gesture Plugin
+The plugin handles the connection with the server, computes gestures from received data, and keeps track of the last status. 
+
 ![](Gesture%20Plugin.png)
 
-The plugin can be opened by clicking "Plugins/Gesture Panel" in the menu. 
+The top pane shows information about the server and has a button for starting and closing the connection. ``Configuration`` pane provides options to modify body tracking data received from the server. ``Save`` button saves the current values to a JSON file (which is used to load up values in next run). ``Status`` pane shows important updates, e.g., indicating whether a server is connected.
 
-On the top, information about the server is shown. The button is for starting the connection and closing it. The ``configuration`` panel provides GUIs for modifying the values that are used to remap the body tracking data received from the server. These values are written in a JSON configuration file. The ``save`` button on the bottom is used to save the current values in the JSON file. The ``Status`` panel prints out important statues, e.g., indiciating it is connecting to the server or closing the connection.
+> Click "Plugins/Gesture Panel" in the menu to open the plugin.
 
-See ```plugins/gesture_plugin``` for implementation.
+> See codes under ```plugins/gesture_plugin``` for implementation.
 
 ## Tracking Manager
-This class manages the socket connection and keeps track of the latest user tracking data from the gesture tracking server. See ```plugins/gesture_plugin/tracker```.
+The plugin has an instance of TrackingManager class. This class manages the socket connection and keeps track of the latest data from the gesture tracking server. 
+> See codes under ```plugins/gesture_plugin/tracker```.
 
-At the start, the information about the socket, ip address and port number, is read from a JSON configuration file. The file also contains information about how to process the user tracking data.
+At the start, the information about the socket, e.g., IP address and port number, is read from a JSON configuration file. The file also contains information about how to process the user tracking data.
 
 ```
 {
@@ -134,7 +137,7 @@ At the start, the information about the socket, ip address and port number, is r
     "leaningDirScaleFactor": [1.0, 1.0, 1.0]
 }
 ```
-In addition to providing methods for starting and closing the connection, it keeps track of the lastest message received from the server. The data can be accessed by calling ```pollState()```. When the method is called, the object that stores the latest information becomes empty, indicating the data has been used. In the plugin, the method is called in ```process(std::string key)```. 
+In addition to providing methods for starting and closing the connection, the class keeps track of the latest data received from the server. The data can be accessed by calling ```pollState()```. When the method is called, the object that stores the latest information becomes empty, indicating the data has been used. In the plugin, the method is called in ```process(std::string key)```. 
 
 ```
 void PanelGesture::process(std::string key) {
@@ -149,9 +152,7 @@ void PanelGesture::process(std::string key) {
   }
 }
 ```
-
-The manager also figure out current gestures. When a message is received from the server, ```updateState(std::string message)``` is called to process the message. In our current implementation, we compute a leaning direction and the current gesture mode.
-
+The manager class also figures out current gestures. When a message is received from the server, ```updateState(std::string message)``` is called to process the message. We compute a leaning direction and the current gesture mode in our current implementation.
 
 # Bug Fixes
 This alpha version fixes few bugs. See the list in https://github.com/jungwhonam-tacc/ospray_studio/issues.

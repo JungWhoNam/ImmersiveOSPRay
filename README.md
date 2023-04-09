@@ -44,3 +44,75 @@ Config File Generator
 
 Containers
 * https://github.com/GregAbram/TACCOspray
+
+---
+
+## Build Processes
+Follow these steps to build OSPRay and OSPRay Studio and run our example mode in OSPRay Studio. 
+
+### Build OSPRay
+Make sure to use the branch ```v2.11.0-alpha.x``` and use the commit ```6a27b0a19c6711c56c1269b7a2494bc4963cbeae``` is used.
+```
+git clone https://github.com/jungwhonam-tacc/ospray.git
+cd ospray
+
+# switch to the alpha branch
+git switch v2.11.0-alpha.x
+
+# revert to the previous commit (currently fixing a bug)
+git reset --hard HEAD~1
+
+# create "build/release"
+mkdir build
+cd build
+mkdir release
+
+cmake -S ../scripts/superbuild -B release -DCMAKE_BUILD_TYPE=Release -DBUILD_OSPRAY_MODULE_MPI=ON -DBUILD_EMBREE_FROM_SOURCE=OFF
+
+cmake --build release -- -j 5
+
+cmake --install release
+```
+
+### Build OSPRay Studio
+Make sure to set ```ospray_DIR``` so CMake can locate OSPRay. Run following command. 
+
+```
+git clone https://github.com/jungwhonam-tacc/ospray_studio.git
+cd ospray_studio
+
+# switch to the devel branch
+git switch devel
+
+# create "build/release"
+mkdir build
+cd build
+mkdir release
+
+cmake -S .. \
+-B release \
+-DCMAKE_BUILD_TYPE=Release \
+-DUSE_PYSG=OFF \
+-DUSE_MPI=ON \
+-DBUILD_PLUGINS=ON \
+-DBUILD_PLUGIN_GESTURE=ON \
+-Dospray_DIR="/Users/jnam/Documents/Test/ospray/build/release/install/ospray/lib/cmake/ospray-2.10.0"
+
+cmake --build release -- -j 5
+
+cmake --install release
+```
+
+### Run our example mode
+First, put the [```config```](config) folder to ```build/release/install/bin```, and run the following command. See [Extending OSPRay Studio](OSPRayStudio/OSPRayStudio.md) for the inputs.
+
+```
+mpirun -n 3 \
+./ospStudio \
+multiwindows \
+--mpi \
+--displayConfig config/display_settings.json \
+--scene multilevel_hierarchy \
+--plugin gesture \
+--plugin:gesture:config config/tracking_settings.json
+```

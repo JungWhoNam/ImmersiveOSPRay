@@ -1,16 +1,16 @@
 # Gesture Tracking Server
 See the implementation in https://github.com/jungwhonam-tacc/GestureTrackingServer/tree/windows.
 
-The server gets user tracking data from sensors. It then parses the data (removing unecessary information, e.g., orientations of joints), and send the data to connected clients.
+The server gets body-tracking data from sensors. It then parses the data (removing unnecessary information, e.g., orientations of joints) and sends the data to connected clients.
 
 ![](Gesture%20Server.png)
 | *the server sends the tracking data to connected clients at every frame* |
 
-```k4abt_frame_t``` is a struct from Kinect SDK, and contains skeleton(s) at the current frame. A skeleton contains a list of joints; each joint contains a position, an orientation, and a confidence_level.
+```k4abt_frame_t``` is a struct from Kinect SDK, and contains skeleton(s) at the current frame. A skeleton contains a list of joints; each contains a position, an orientation, and a confidence level.
 
-```GestureDetector``` extracts important information from ```k4abt_frame_t```, and packages the information into a JSON format. Currently, it extracts positions and confidence_levels of all the joints provided by the SDK. 
+```GestureDetector``` extracts important information from ```k4abt_frame_t```, and packages the information into a JSON format. It extracts positions and confidence levels of all the joints provided by the SDK. 
 
-```async-sockets``` opens a TCP socket and keeps tracks of connected clients. It sends the JSON string from ```GestureDetector``` to client(s).
+```async-sockets``` opens a TCP socket and keeps track of connected clients. It sends the JSON string from ```GestureDetector``` to client(s).
 
 ## Four Dependencies
 ### 1. Azure Kinect SDK (currently using v1.4.1)
