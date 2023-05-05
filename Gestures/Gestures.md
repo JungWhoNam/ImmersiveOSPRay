@@ -1,5 +1,7 @@
-# Example Gestures
-In this section, we describe gesture interaction techniques. 
+# Testing Gestures
+> This documentation is part of a project called [Immersive OSPray](../README.md).
+
+In this section, we describe example gestures we have tested.
 
 ## 1. Rotating a cube
 [![](demo%20-%20rotate%20a%20cube.png)](demo%20-%20rotate%20a%20cube.mp4)
