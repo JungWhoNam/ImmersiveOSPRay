@@ -33,12 +33,12 @@ At the start, the application reads [a JSON configuration file](https://github.c
 ## 2. Use gesture-based interaction techniques
 [![](demo%20-%20rattler.png)](demo%20-%20rattler.MOV)
 
-We created [a plugin](https://github.com/jungwhonam/ospray_studio/tree/v0.12.0-alpha.x) and [a server application](https://github.com/jungwhonam/GestureTrackingServer) to support a flying gesture to move in a 3D virtual environment. The server application gets body tracking data from Microsoft Kinect SDK and send these to connected clients. The plugin detects a flying gesture from the recieved data and moves the camera accordingly. 
+We created [a plugin](https://github.com/jungwhonam/ospray_studio/tree/jungwho.nam-feature-plugin-gesture/plugins/gesture_plugin) and [a server application](https://github.com/jungwhonam/GestureTrackingServer) to support a flying gesture to move in a 3D virtual environment. The server application gets body tracking data from Microsoft Kinect SDK and send these to connected clients. The plugin detects a flying gesture from the recieved data and moves the camera accordingly. 
 
 In the video, a user moves around a 3D virtual environment by lifting both hands - pretending to be a bird - and leaning the body to fly in that direction. When multiple users are presented in the area, the user closest to the sensor is considered the primary user.
 
 > [!NOTE]  
-See [the plugin](https://github.com/jungwhonam/ospray_studio/tree/v0.12.0-alpha.x) for details and installation steps.
+See [the plugin](https://github.com/jungwhonam/ospray_studio/tree/jungwho.nam-feature-plugin-gesture/plugins/gesture_plugin) for details and installation steps.
 
 
 
