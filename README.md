@@ -1,10 +1,21 @@
 # Immersive OSPRay Studio
-We create several extensions to [OSPRay Studio v1.0.0](https://github.com/RenderKit/ospray-studio/releases/tag/v1.0.0) to enable immersive virtual reality and storytelling experiences.
+We provide several extensions to [OSPRay Studio v1.0.0](https://github.com/RenderKit/ospray-studio/releases/tag/v1.0.0) to enable immersive virtual reality and storytelling experiences.
 
 1. Display a single, coherent virtual environment on tiled display walls
+   * [a branch in OSPRay Studio](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-multidisplays): an extension to support the display feature
+   * [Configuration Generator](https://github.com/JungWhoNam/ConfigurationGenerator): Unity project for arranging display objects in a spatial layout and save the configuration in a JSON file
 2. Use gesture-based interaction techniques
+   * [a plugin for OSPRay Studio](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-plugin-gesture): a plugin to support a flying gesture to move around in a 3D environement
+   * [Gesture Tracking Server](https://github.com/JungWhoNam/GestureTrackingServer): C++ TCP server that sends body tracking data from Kinect SDK to connected clients
 3. Create annotated, animated stories
-4. Move around a 3D environment using spoken words *(UPCOMING)*
+   * [a plugin for OSPRay Sutdio](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-plugin-storyboard): a plugin to support the story creation
+   * [Storyboard](https://github.com/JungWhoNam/Storyboard): Unity client for constructing a story
+   * [V-Mail Server](https://github.com/JungWhoNam/VisualizationMailServer): a server for managing created stories
+4. *(UPCOMING)* Move around a 3D environment using spoken words 
+
+> [!NOTE]
+> See [this branch in OSPRay Studio](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-immersive-latest) that merges all the extensions made to OSPRay Studio.
+
 
 ## 1. Display a single, coherent virtual environment on tiled display walls
 ![TACC Rattler](rattler.png)
@@ -12,7 +23,7 @@ We create several extensions to [OSPRay Studio v1.0.0](https://github.com/Render
 We extended the application to simultaneously run multiple windows and move/scale these windows to create a large window. In the image, you see OSPRay Studio running on [TACC's Rattler system](https://www.tacc.utexas.edu/systems/rattler/), a tiled-display system driven by a cluster of 19 Linux PCs. Each node runs an MPI-process that shows a window on display, and all the displays form a hemisphere providing a surrounding view.
 
 > [!NOTE]  
-See [this branch](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-immersive-latest) for details and installation steps.
+See [this branch](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-multidisplays) for details and installation steps.
 
 <div id="image-table">
     <table>
@@ -27,7 +38,7 @@ See [this branch](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-f
     </table>
 </div>
 
-At the start, the application reads [a JSON configuration file](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-immersive-latest?tab=readme-ov-file#support-other-display-settings) to set its cameras and arrange windows. We provide [this Unity project](https://github.com/JungWhoNam/ConfigurationGenerator) to assist users in creating this JSON file.
+At the start, the application reads [a JSON configuration file](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-multidisplays?tab=readme-ov-file#support-other-display-settings) to set its cameras and arrange windows. We provide [this Unity project](https://github.com/JungWhoNam/ConfigurationGenerator) to assist users in creating this JSON file.
 
 
 ## 2. Use gesture-based interaction techniques
@@ -39,7 +50,6 @@ In the video, a user moves around a 3D virtual environment by lifting both hands
 
 > [!NOTE]  
 See [the plugin](https://github.com/jungwhonam/ospray_studio/tree/jungwho.nam-feature-plugin-gesture/plugins/gesture_plugin) for details and installation steps.
-
 
 
 ## 3. Create annotated, animated stories
@@ -56,5 +66,5 @@ In the above image, you see three applications:
 See [the plugin](https://github.com/JungWhoNam/ospray_studio/tree/jungwho.nam-feature-plugin-storyboard/plugins/storyboard_plugin) for details and installation steps.
 
 
-## 4. Move around a 3D environment using spoken words *(UPCOMING)*
+## *(UPCOMING)* 4. Move around a 3D environment using spoken words
 The goal is to create a plugin with voice-control capabilities so users can move around a 3D environment using spoken words.
